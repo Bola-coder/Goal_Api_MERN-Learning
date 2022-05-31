@@ -4,7 +4,7 @@ const {
   createGoal,
   updateGoal,
   deleteGoal,
-} = require("./../controller/goalController");
+} = require("../controllers/goalController");
 
 const router = express.Router();
 
