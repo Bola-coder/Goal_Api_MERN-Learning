@@ -16,7 +16,8 @@ exports.createGoal = (req, res) => {
 
 exports.updateGoal = (req, res) => {
   try {
-    res.status(200).json({ staus: "success", message: "Goal Updated" });
+    const id = req.params.id * 1;
+    res.status(200).json({ staus: "success", message: `Goal ${id} updated` });
   } catch (err) {
     res.status(400).json({ staus: "fail", message: err.message });
   }
@@ -24,7 +25,8 @@ exports.updateGoal = (req, res) => {
 
 exports.deleteGoal = (req, res) => {
   try {
-    res.status(204).json({ staus: "success", message: "Goal Deleted" });
+    const id = req.params.id * 1;
+    res.status(204).json({ staus: "success", message: `Goal ${id} deleted` });
   } catch (err) {
     res.status(400).json({ staus: "fail", message: err.message });
   }

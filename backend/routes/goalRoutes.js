@@ -6,7 +6,10 @@ const router = express.Router();
 router
   .route("/")
   .get(goalController.getAllGoals)
-  .post(goalController.createGoal)
+  .post(goalController.createGoal);
+
+router
+  .route("/:id")
   .patch(goalController.updateGoal)
   .delete(goalController.deleteGoal);
 
