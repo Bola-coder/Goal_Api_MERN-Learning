@@ -1,10 +1,18 @@
 const asyncHandler = require("express-async-handler");
+const Goal = require("./../models/goalModel");
 
 // @descr: Get all Goals
 //  @Route: GET /api/v1/goals
 // @Access: PRIVATE
-exports.getAllGoals = asyncHandler((req, res) => {
-  res.status(200).json({ staus: "success", message: "Sent from Goals API" });
+exports.getAllGoals = asyncHandler(async (req, res) => {
+  const goals = await Goal.find();
+  res.status(200).json({
+    staus: "success",
+    result: goals.length,
+    data: {
+      goals,
+    },
+  });
 });
 
 // @descr: Create new Goal
@@ -16,7 +24,18 @@ exports.createGoal = asyncHandler(async (req, res) => {
     res.status(400);
     throw Error("Please include a text. field");
   }
-  res.status(201).json({ staus: "success", message: "New Goal Created" });
+
+  const goal = await Goal.create({
+    title: req.body.title,
+    text: req.body.text,
+  });
+
+  res.status(201).json({
+    staus: "success",
+    data: {
+      goal,
+    },
+  });
 });
 
 // @descr: Update Goal

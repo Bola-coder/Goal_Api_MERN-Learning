@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const goalSchema = mongoose.Schema(
   {
-    tile: {
+    title: {
       type: String,
       unique: [true, "A Goal title should be unique"],
       required: [true, "A Goal should have a title"],
