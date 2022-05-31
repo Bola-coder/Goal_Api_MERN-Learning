@@ -1,3 +1,6 @@
+// @descr: Get all Goals
+//  @Route: GET /api/v1/goals
+// @Access: PRIVATE
 exports.getAllGoals = (req, res) => {
   try {
     res.status(200).json({ staus: "success", message: "Sent from Goals API" });
@@ -6,6 +9,9 @@ exports.getAllGoals = (req, res) => {
   }
 };
 
+// @descr: Create new Goal
+//  @Route: POST /api/v1/goals
+// @Access: PRIVATE
 exports.createGoal = (req, res) => {
   try {
     res.status(201).json({ staus: "success", message: "New Goal Created" });
@@ -14,6 +20,9 @@ exports.createGoal = (req, res) => {
   }
 };
 
+// @descr: Update Goal
+//  @Route: PATCH /api/v1/goals/:id
+// @Access: PRIVATE
 exports.updateGoal = (req, res) => {
   try {
     const id = req.params.id * 1;
@@ -23,6 +32,9 @@ exports.updateGoal = (req, res) => {
   }
 };
 
+// @descr: Delete Goal
+//  @Route: DELETE /api/v1/goals/:id
+// @Access: PRIVATE
 exports.deleteGoal = (req, res) => {
   try {
     const id = req.params.id * 1;
