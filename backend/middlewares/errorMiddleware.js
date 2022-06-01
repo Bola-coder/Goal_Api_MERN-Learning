@@ -8,6 +8,8 @@ const errorHandler = (err, req, res, next) => {
     stack: process.env.NODE_ENV === "production" ? null : err.stack,
   });
 };
+// End of Error Handling Middleware.
+//  To be used in app.js
 
 module.exports = {
   errorHandler,

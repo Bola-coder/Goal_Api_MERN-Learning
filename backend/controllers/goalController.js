@@ -19,7 +19,6 @@ exports.getAllGoals = asyncHandler(async (req, res) => {
 //  @Route: POST /api/v1/goals
 // @Access: PRIVATE
 exports.createGoal = asyncHandler(async (req, res) => {
-  console.log(req.body);
   if (!req.body.text) {
     res.status(400);
     throw Error("Please include a text. field");
@@ -41,15 +40,42 @@ exports.createGoal = asyncHandler(async (req, res) => {
 // @descr: Update Goal
 //  @Route: PATCH /api/v1/goals/:id
 // @Access: PRIVATE
-exports.updateGoal = asyncHandler((req, res) => {
-  const id = req.params.id * 1;
-  res.status(200).json({ staus: "success", message: `Goal ${id} updated` });
+exports.updateGoal = asyncHandler(async (req, res) => {
+  const id = req.params.id;
+  const goal = await Goal.findById(id);
+
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found");
+  }
+
+  const updatedGoal = await Goal.findByIdAndUpdate(id, req.body, {
+    new: true,
+    runValidators: true,
+  });
+  res.status(200).json({
+    staus: "success",
+    data: {
+      goal: updatedGoal,
+    },
+  });
 });
 
 // @descr: Delete Goal
 //  @Route: DELETE /api/v1/goals/:id
 // @Access: PRIVATE
 exports.deleteGoal = asyncHandler(async (req, res) => {
-  const id = req.params.id * 1;
-  res.status(204).json({ staus: "success", message: `Goal ${id} deleted` });
+  const id = req.params.id;
+  const goal = Goal.findById(id);
+  if (!goal) {
+    res.status(400);
+    throw new Error("Goal not found");
+  }
+  await Goal.findByIdAndDelete(id);
+  res.status(200).json({
+    staus: "success",
+    data: {
+      id: id,
+    },
+  });
 });
