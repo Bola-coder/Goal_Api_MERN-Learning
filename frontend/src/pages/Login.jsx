@@ -14,10 +14,10 @@ function Login() {
       [e.target.name]: [e.target.value],
     }));
   };
+
   const onSubmit = (e) => {
     e.preverntDefualt();
   };
-  console.log(formData);
 
   return (
     <>
