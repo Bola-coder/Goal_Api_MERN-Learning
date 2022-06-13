@@ -38,9 +38,13 @@ function Register() {
       [e.target.name]: [e.target.value],
     }));
   };
+
+  // Submit the form
   const onSubmit = (e) => {
-    e.preverntDefualt();
-    if (password !== confirmPassword) {
+    e.preventDefault();
+    const { name, email, password, confirmPassword } = formData;
+    if (password.toString() !== confirmPassword.toString()) {
+      console.log(password, confirmPassword);
       toast.error("Passwords do not match");
     } else {
       const userData = {
